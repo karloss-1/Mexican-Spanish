@@ -1,0 +1,24 @@
+{
+  "name": "Mexican Spanish Flashcards",
+  "short_name": "Spanish Cards",
+  "description": "Active Spanish production with spaced repetition",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F8F6ED",
+  "theme_color": "#0F5132",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
