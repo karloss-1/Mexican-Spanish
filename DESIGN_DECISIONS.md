@@ -79,11 +79,11 @@ Fuentes: [index.html](index.html), [README de ConjuFlow](https://github.com/karl
 
 **Hecho.** La app concentra estructura, estilos y lógica en [index.html](index.html), carga contenido y FSRS localmente y no incluye backend ni un proceso de compilación. El [manifiesto](manifest.webmanifest) define inicio y alcance relativos, modo standalone e iconos; hay metadatos móviles y de Apple.
 
-**Límite comprobado.** La rama inspeccionada no incluye service worker ni código que lo registre. El manifiesto permite configuración de presentación/instalación según el navegador, pero no implementa por sí mismo una caché offline. No se puede prometer reapertura sin conexión basándose en este repo. IndexedDB conserva progreso local, que es una cuestión distinta de poder cargar la app offline.
+La app registra [sw.js](sw.js), que precarga la estructura de la aplicación, los datos, la biblioteca FSRS y los iconos. Después de una primera carga correcta con conexión, puede volver a abrirse sin conexión con esos recursos. Su caché se llama `mexican-spanish-flashcards-v1`; al actualizarse, solo elimina cachés con ese prefijo. El service worker está en el directorio de la app y su alcance no incluye ConjuFlow. No lee, escribe ni elimina IndexedDB: el progreso local sigue siendo una cuestión separada de la caché offline.
 
-**Razonamiento inferido.** Servir archivos estáticos y mantener la dependencia local facilita alojamiento y reduce dependencias de infraestructura. La intención de una experiencia parecida a una app se observa en el manifiesto, pero el motivo histórico de la ausencia de service worker no está documentado.
+**Razonamiento inferido.** Servir archivos estáticos y mantener la dependencia local facilita alojamiento y reduce dependencias de infraestructura. Una caché propia permite uso sin conexión sin compartir estado ni archivos con ConjuFlow.
 
-**Revisión.** Si se necesita uso offline fiable, implementarlo y probarlo explícitamente, con nombres y limpieza de caché propios que no afecten a ConjuFlow. Este documento solo registra el estado: no añade esa funcionalidad.
+**Revisión.** Al cambiar recursos precargados, actualizar el nombre de caché y comprobar la carga offline. Mantener el prefijo y el alcance propios para no afectar a ConjuFlow.
 
 ## 7. Decisiones de interfaz
 
