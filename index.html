@@ -106,4 +106,10 @@ function updateButtons(enabled){gradeButtons.forEach(button=>button.disabled=!en
 async function grade(rating){const current=cardById(currentCardId);if(!current||!showing)return;const ratings={1:FsrsRating.Again,2:FsrsRating.Hard,3:FsrsRating.Good,4:FsrsRating.Easy};deckProgress().cards[current.id]=fsrsScheduler.next(schedulerCard(current),new Date(),ratings[rating]).card;deckProgress().updatedAt=Date.now();await saveProgress(deckProgress());showing=false;currentCardId=null;rebuildQueue();}
 deckSelect.addEventListener("change",()=>selectDeck(deckSelect.value));cardEl.addEventListener("click",reveal);cardEl.addEventListener("keydown",e=>{if(e.code==="Space"||e.code==="Enter"){e.preventDefault();reveal();}});$("nextButton").addEventListener("click",next);$("previousButton").addEventListener("click",previous);gradeButtons.forEach(button=>button.addEventListener("click",()=>grade(Number(button.dataset.grade))));document.addEventListener("keydown",e=>{if(e.target.matches("select,button"))return;if(e.code==="Space"){e.preventDefault();reveal();}if(e.key==="ArrowRight")next();if(e.key==="ArrowLeft")previous();});document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")rebuildQueue();});window.addEventListener("pageshow",rebuildQueue);
 async function init(){try{if(!CONTENT||CONTENT.decks.length!==9)throw new Error("The built-in deck data is invalid.");db=await openDatabase();progressByDeck=new Map((await getAllProgress()).map(item=>[item.deckId,item]));await syncCanonicalContent();const preferred=localStorage.getItem(SELECTED_DECK_KEY);selectDeck(progressByDeck.has(preferred)?preferred:CONTENT.decks[0].id);}catch(error){console.error(error);$("status").textContent="Local storage could not be opened. Please check your browser settings.";}}init();
+</script><script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(error => console.error("Service worker registration failed:", error));
+  });
+}
 </script></body></html>
