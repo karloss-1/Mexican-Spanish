@@ -1,6 +1,6 @@
 # Decisiones de diseño y pedagogía de Mexican Spanish Flashcards
 
-Estado: decisiones vigentes, sujetas a revisión. Inspección: 9 de septiembre de 2026, rama `main`, base [ed6625c](https://github.com/karloss-1/Mexican-Spanish/commit/ed6625c).
+Estado: decisiones vigentes, sujetas a revisión. Actualización: 16 de septiembre de 2026, rama `main`.
 
 ## Cómo interpretar estas notas
 
@@ -10,11 +10,11 @@ Este documento permite retomar el proyecto sin depender de conversaciones anteri
 
 ## 1. Propósito: producir vocabulario del español mexicano hablado
 
-**Hecho.** La interfaz y el manifiesto describen “Active Spanish production with spaced repetition”. El anverso muestra una pista en inglés; el reverso contiene la respuesta en español, un ejemplo en español y su traducción inglesa. No se incluyen aquí paradigmas completos de conjugación, corrección automática de respuestas ni audio.
+**Hecho.** La interfaz y el manifiesto describen “Active Spanish production with spaced repetition”. El anverso muestra la pista en inglés junto con su ejemplo en inglés; el reverso contiene la respuesta en español junto con el ejemplo correspondiente en español. No se incluyen aquí paradigmas completos de conjugación, corrección automática de respuestas ni audio.
 
 Los datos incluyen palabras, expresiones y marcadores conversacionales, por ejemplo ya, pues, o sea, es que, ajá y güey. El objetivo de vocabulario mexicano cotidiano se refleja en los títulos de los mazos y en su contenido; no todas las entradas son exclusivas de México.
 
-**Razonamiento inferido.** La dirección inglés→español favorece intentar producir la expresión antes de reconocerla. Los ejemplos sitúan significado y uso más allá de una equivalencia aislada. Incluir marcadores y expresiones coloquiales es coherente con conversaciones reales, además del vocabulario de manual.
+**Razonamiento inferido.** La dirección inglés→español favorece intentar producir la expresión antes de reconocerla. Mostrar el ejemplo inglés en el anverso aporta contexto semántico a la pista y reduce la ambigüedad de palabras con varias traducciones posibles; al revelar, el ejemplo español permite comparar cómo se expresa ese mismo significado en contexto. La palabra o expresión objetivo sigue siendo el foco de recuperación, no la reproducción literal de toda la oración. Incluir marcadores y expresiones coloquiales es coherente con conversaciones reales, además del vocabulario de manual.
 
 **Límites y revisión.** Una traducción breve puede admitir varias respuestas válidas; no debe confundirse la respuesta guardada con la única formulación posible. Los ejemplos no constituyen por sí solos un sistema completo de registro, región o adecuación social. Revisar ambigüedades, lenguaje coloquial y contextos según los estudiantes; valorar audio, variantes aceptadas o pistas contextuales si ayudan a sus objetivos.
 
@@ -35,7 +35,7 @@ La cabecera de decks.js declara que se generó a partir de CSV suministrados y p
 
 **Razonamiento inferido.** Dividir las listas en bloques de 100 ofrece selecciones manejables sin cargar la interfaz de filtros. Separar vocabulario general y verbos permite orientar la práctica por necesidad. No hay evidencia en el repo de que nueve mazos o bloques de 100 sean tamaños óptimos pedagógicamente.
 
-**Revisión.** Recuperar y versionar CSV, procedencia, criterios de selección y conversión antes de una edición importante del contenido. Si aún no se recuperan, registrar explícitamente una nueva fuente editable y su relación con los datos existentes. Al ampliar mazos, revisar también la validación fija de nueve; al reordenar tarjetas, conservar identidad por contenido o planificar una migración, porque los IDs actuales son posicionales. No tratar un cambio de numeración como una edición puramente visual.
+**Revisión.** Recuperar y versionar CSV, procedencia, criterios de selección y conversión antes de una edición importante del contenido. Si aún no se recuperan, registrar explícitamente una nueva fuente editable y su relación con los datos existentes. La validación fija de nueve mazos es intencional: esta app está definida como un conjunto cerrado de 900 tarjetas y no se prevé ampliar ni reducir ese contenido. Al reordenar tarjetas, conservar identidad por contenido o planificar una migración, porque los IDs actuales son posicionales. No tratar un cambio de numeración como una edición puramente visual.
 
 ## 3. Recuperación activa y repetición espaciada con FSRS
 
@@ -83,17 +83,17 @@ La app registra [sw.js](sw.js), que precarga la estructura de la aplicación, lo
 
 **Razonamiento inferido.** Servir archivos estáticos y mantener la dependencia local facilita alojamiento y reduce dependencias de infraestructura. Una caché propia permite uso sin conexión sin compartir estado ni archivos con ConjuFlow.
 
-**Revisión.** Al cambiar recursos precargados, actualizar el nombre de caché y comprobar la carga offline. Mantener el prefijo y el alcance propios para no afectar a ConjuFlow.
+**Revisión.** Mantener el nombre de caché `mexican-spanish-flashcards-v1`, su prefijo y el alcance propios para preservar el aislamiento respecto a ConjuFlow. Durante el desarrollo actual, los cambios de interfaz no requieren incrementar la versión del caché; comprobar la carga offline cuando corresponda.
 
 ## 7. Decisiones de interfaz
 
-**Hecho.** La versión actual usa una tarjeta central, un selector de mazo, pista visible para revelar y etiquetas English/Spanish. En el reverso, la respuesta tiene más peso visual que el ejemplo español y su traducción. La navegación es secundaria respecto a los cuatro botones de calificación.
+**Hecho.** La versión actual usa una tarjeta central, un selector de mazo, pista visible para revelar y etiquetas English/Spanish. El anverso presenta la palabra o expresión inglesa con su ejemplo en inglés; el reverso presenta la respuesta española con su ejemplo en español. En ambos lados, la palabra o expresión objetivo tiene mayor peso visual que el ejemplo. La navegación es secundaria respecto a los cuatro botones de calificación.
 
 La paleta usa superficies claras, verde como identidad y colores diferenciados para las calificaciones, acompañados de texto. En pantallas pequeñas los cuatro botones se distribuyen en dos columnas; la tarjeta tiene espacio estable y desplazamiento interior para contenido largo. Incluye foco visible, interacción de teclado, mensajes de estado y reducción de animaciones según la preferencia del sistema.
 
 El indicador `posición / tamaño de cola` y su barra representan ubicación en la cola actual. Navegar puede moverlos; no son un conteo acumulado de tarjetas calificadas ni una medida de dominio. Esta semántica es distinta de la barra por revisiones de ConjuFlow.
 
-**Razonamiento inferido.** Una jerarquía clara centra la atención en producir y comprobar; separar visualmente traducción y ejemplo facilita consultar sin competir con la respuesta. Mantener navegación secundaria ayuda a distinguirla de calificar. El diseño móvil favorece sesiones breves, pero no hay un estudio de usabilidad documentado.
+**Razonamiento inferido.** Una jerarquía clara centra la atención en producir y comprobar. Emparejar cada idioma con su propio ejemplo mantiene el contexto disponible antes y después de revelar sin mostrar anticipadamente la respuesta española. Mantener navegación secundaria ayuda a distinguirla de calificar. El diseño móvil favorece sesiones breves, pero no hay un estudio de usabilidad documentado.
 
 **Revisión.** Comprobar legibilidad, contraste, contenido largo, accesibilidad y comprensión de la barra con usuarios. Valorar instrucciones de calificación más precisas si hay confusión. Los colores y la disposición son decisiones revisables, no identidad inalterable.
 
