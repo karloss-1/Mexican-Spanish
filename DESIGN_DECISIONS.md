@@ -87,7 +87,7 @@ La app registra [sw.js](sw.js), que precarga la estructura de la aplicación, lo
 
 ## 7. Decisiones de interfaz
 
-**Hecho.** La versión actual usa una tarjeta central, un selector de mazo, pista visible para revelar y etiquetas English/Spanish. El anverso presenta la palabra o expresión inglesa con su ejemplo en inglés; el reverso presenta la respuesta española con su ejemplo en español. En ambos lados, la palabra o expresión objetivo tiene mayor peso visual que el ejemplo. La navegación es secundaria respecto a los cuatro botones de calificación.
+**Hecho.** La versión actual usa una tarjeta central, un selector de mazo, pista visible para revelar y etiquetas English/Spanish. El anverso presenta la palabra o expresión inglesa con su ejemplo en inglés; el reverso presenta la respuesta española con su ejemplo en español. En ambos lados, la palabra o expresión objetivo tiene mayor peso visual que el ejemplo. La navegación es secundaria respecto a los cuatro botones de calificación. Un botón de ayuda abre una guía en inglés sobre cómo estudiar una tarjeta, cómo usar Again/Hard/Good/Easy, la navegación, la repetición espaciada y el almacenamiento local del progreso. El pie de página identifica la app y muestra `Mexican Spanish Flashcards · Created by Azael · © 2026`.
 
 La paleta usa superficies claras, verde como identidad y colores diferenciados para las calificaciones, acompañados de texto. En pantallas pequeñas los cuatro botones se distribuyen en dos columnas; la tarjeta tiene espacio estable y desplazamiento interior para contenido largo. Incluye foco visible, interacción de teclado, mensajes de estado y reducción de animaciones según la preferencia del sistema.
 
