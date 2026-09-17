@@ -67,6 +67,15 @@ function makeContext({ userAgent, platform = "", maxTouchPoints = 0, standalone 
   assert.equal(promptCalled, true);
   assert.equal(android.installButton.hidden, true);
 
+  const canceled = makeContext({ userAgent: "Mozilla/5.0 (Linux; Android 14; Pixel 8) Chrome/140 Mobile Safari/537.36" });
+  canceled.dispatch("beforeinstallprompt", {
+    preventDefault() {},
+    async prompt() {},
+    userChoice: Promise.resolve({ outcome: "dismissed" })
+  });
+  await canceled.installButton.click();
+  assert.equal(canceled.installButton.hidden, true, "canceling the native prompt must be harmless");
+
   const desktop = makeContext({ userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) Chrome/140 Safari/537.36", platform: "MacIntel" });
   let desktopPrevented = false;
   desktop.dispatch("beforeinstallprompt", { preventDefault() { desktopPrevented = true; } });
