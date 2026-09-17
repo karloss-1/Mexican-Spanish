@@ -1,8 +1,9 @@
 "use strict";
 
-const CACHE_NAME = "mexican-spanish-flashcards-v2";
+const CACHE_NAME = "mexican-spanish-flashcards-v3";
 const APP_FILES = [
   "./", "./index.html", "./manifest.webmanifest", "./data/decks.js", "./study-policy.js",
+  "./install.js",
   "./vendor/ts-fsrs-5.4.1.umd.js", "./assets/favicon-32.png",
   "./assets/apple-touch-icon.png", "./assets/isotype-128.png",
   "./assets/icon-192.png", "./assets/icon-512.png"

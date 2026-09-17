@@ -79,6 +79,9 @@ button:disabled{cursor:not-allowed;opacity:.48}
 .empty{padding:40px 20px;background:var(--color-surface);border:1px dashed var(--color-border);border-radius:var(--radius-md);text-align:center;color:var(--color-muted)}
 .empty strong{display:block;margin-bottom:6px;color:var(--color-text);font-size:1.15rem}
 .status{min-height:20px;margin:8px 0 0;color:#9B2C2C;font-size:.88rem;font-weight:650;text-align:center}
+.install-button{position:absolute;top:0;right:46px;display:grid;place-items:center;width:42px;min-height:42px;padding:0;border-radius:50%;background:var(--color-surface);color:var(--color-green);box-shadow:var(--shadow-soft)}
+.install-button:hover:not(:disabled){border-color:#B8CCC0}
+.install-button svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:2}
 .help-button{position:absolute;top:0;right:0;width:42px;min-height:42px;padding:0;border-radius:50%;background:var(--color-surface);color:var(--color-green);font-size:1.15rem;font-weight:850;box-shadow:var(--shadow-soft)}
 .help-button:hover:not(:disabled){border-color:#B8CCC0}
 .attribution{margin:18px 0 0;text-align:center;color:var(--color-muted);font-size:.76rem;font-weight:600}
@@ -87,6 +90,7 @@ button:disabled{cursor:not-allowed;opacity:.48}
 .help-heading{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);padding:18px 20px 14px;background:var(--color-surface);border-bottom:1px solid var(--color-border)}
 .help-heading h2{margin:0;color:var(--color-green-dark);font-size:1.25rem}
 .close-help{width:38px;min-height:38px;padding:0;border:0;background:transparent;color:var(--color-muted);font-size:1.55rem;line-height:1}
+.install-dialog>p{padding:16px 20px 20px}
 .help-dialog section{padding:16px 20px 0}
 .help-dialog section:last-of-type{padding-bottom:20px}
 .help-dialog h3{margin:0 0 7px;color:var(--color-green);font-size:.95rem}
@@ -98,6 +102,8 @@ button:disabled{cursor:not-allowed;opacity:.48}
 @media(max-width:560px){
   body{padding:10px 12px calc(26px + env(safe-area-inset-bottom))}
   .app-header{justify-content:flex-start;gap:10px;margin:0 48px 10px 2px;padding:0}
+  body.install-available .app-header{margin-right:92px}
+  .install-button{right:46px;width:40px;min-height:40px}
   .help-button{top:2px;right:2px;width:40px;min-height:40px}
   .brand-mark{width:46px;height:46px}
   h1{font-size:clamp(1.1rem,5.25vw,1.4rem);line-height:1.05}
@@ -195,6 +201,9 @@ button:disabled{cursor:not-allowed;opacity:.48}
 </p>
 </section>
 <footer class="attribution">Mexican Spanish Flashcards · Created by Azael · © 2026</footer>
+<button id="installButton" class="install-button" type="button" aria-label="Install app" aria-haspopup="dialog" aria-controls="iosInstallDialog" title="Install app" hidden>
+<svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 21h14"></path></svg>
+</button>
 <button id="helpButton" class="help-button" type="button" aria-label="How to practice" aria-haspopup="dialog" aria-controls="helpDialog" title="How to practice">
 <span aria-hidden="true">?</span>
 </button>
@@ -254,6 +263,15 @@ button:disabled{cursor:not-allowed;opacity:.48}
 <p>Your review progress is saved locally on this device. It is not synced between devices, and clearing this site's browser data may erase it.</p>
 </section>
 </dialog>
+<dialog id="iosInstallDialog" class="help-dialog install-dialog" aria-labelledby="iosInstallTitle">
+<div class="help-heading">
+<h2 id="iosInstallTitle">Install Mexican Spanish Flashcards</h2>
+<button id="closeInstallDialog" class="close-help" type="button" aria-label="Close install instructions">
+<span aria-hidden="true">×</span>
+</button>
+</div>
+<p>To add Mexican Spanish Flashcards to your Home Screen, tap your browser's <strong>Share</strong> button, then choose <strong>Add to Home Screen</strong>.</p>
+</dialog>
 <script src="vendor/ts-fsrs-5.4.1.umd.js">
 </script>
 <script src="data/decks.js">
@@ -277,6 +295,7 @@ async function refreshProgress(){if(!db)return;progressByDeck=new Map((await get
 deckSelect.addEventListener("change",()=>selectDeck(deckSelect.value));newLimitSelect.addEventListener("change",()=>{const limit=window.StudyPolicy.validNewLimit(newLimitSelect.value);newLimitSelect.value=String(limit);localStorage.setItem(NEW_LIMIT_KEY,String(limit));currentCardId=null;showing=false;rebuildQueue();});const helpDialog=$("helpDialog");$("helpButton").addEventListener("click",()=>helpDialog.showModal());$("closeHelpButton").addEventListener("click",()=>helpDialog.close());helpDialog.addEventListener("click",e=>{if(e.target===helpDialog)helpDialog.close();});cardEl.addEventListener("click",reveal);cardEl.addEventListener("keydown",e=>{if(e.code==="Space"||e.code==="Enter"){e.preventDefault();reveal();}});$("nextButton").addEventListener("click",next);$("previousButton").addEventListener("click",previous);gradeButtons.forEach(button=>button.addEventListener("click",()=>grade(Number(button.dataset.grade))));document.addEventListener("keydown",e=>{if(e.target.matches("select,button"))return;if(e.code==="Space"){e.preventDefault();reveal();}if(e.key==="ArrowRight")next();if(e.key==="ArrowLeft")previous();});document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")refreshProgress();});window.addEventListener("pageshow",()=>refreshProgress());
 async function init(){try{const lengths=CONTENT?.decks.map(item=>item.cards.length),ids=CONTENT?.decks.flatMap(item=>item.cards.map(card=>card.id));if(!CONTENT||CONTENT.decks.length!==2||lengths[0]!==600||lengths[1]!==300||new Set(ids).size!==900)throw new Error("The built-in collection data is invalid.");db=await openDatabase();progressByDeck=new Map((await getAllProgress()).map(item=>[item.deckId,item]));await syncCanonicalContent();newLimitSelect.value=String(window.StudyPolicy.validNewLimit(localStorage.getItem(NEW_LIMIT_KEY)));const preferred=localStorage.getItem(SELECTED_DECK_KEY);selectDeck(CONTENT.decks.some(item=>item.id===preferred)?preferred:CONTENT.decks[0].id);}catch(error){console.error(error);$("status").textContent="Local storage could not be opened. Please check your browser settings.";}}init();
 </script>
+<script src="install.js"></script>
 <script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
