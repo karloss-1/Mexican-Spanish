@@ -1,8 +1,8 @@
 "use strict";
 
-const CACHE_NAME = "mexican-spanish-flashcards-v1";
+const CACHE_NAME = "mexican-spanish-flashcards-v2";
 const APP_FILES = [
-  "./", "./index.html", "./manifest.webmanifest", "./data/decks.js",
+  "./", "./index.html", "./manifest.webmanifest", "./data/decks.js", "./study-policy.js",
   "./vendor/ts-fsrs-5.4.1.umd.js", "./assets/favicon-32.png",
   "./assets/apple-touch-icon.png", "./assets/isotype-128.png",
   "./assets/icon-192.png", "./assets/icon-512.png"
@@ -25,9 +25,18 @@ self.addEventListener("activate", event => {
 self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
   event.respondWith(
-    caches.match(event.request).then(cached => cached || fetch(event.request).catch(() => {
-      if (event.request.mode === "navigate") return caches.match("./index.html");
-      return Response.error();
-    }))
+    fetch(event.request)
+      .then(response => {
+        if (response.ok && new URL(event.request.url).origin === self.location.origin) {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
+        }
+        return response;
+      })
+      .catch(() => caches.match(event.request).then(cached => {
+        if (cached) return cached;
+        if (event.request.mode === "navigate") return caches.match("./index.html");
+        return Response.error();
+      }))
   );
 });

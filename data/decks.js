@@ -1,10 +1,10 @@
 /* Generated from the supplied CSV files. Do not edit card text here manually. */
 window.MEXICAN_SPANISH_CONTENT = {
-  "version": 1,
+  "version": 2,
   "decks": [
     {
-      "id": "mexican-spanish-words-001-100",
-      "title": "Everyday Mexican Spanish — 001–100",
+      "id": "essential-mexican-spanish-words",
+      "title": "Essential Mexican Spanish Words",
       "cards": [
         {
           "id": "mexican-spanish-words-001-100-card-001",
@@ -905,13 +905,7 @@ window.MEXICAN_SPANISH_CONTENT = {
             "exampleEs": "El perro está afuera.",
             "exampleEn": "The dog is outside."
           }
-        }
-      ]
-    },
-    {
-      "id": "mexican-spanish-words-101-200",
-      "title": "Everyday Mexican Spanish — 101–200",
-      "cards": [
+        },
         {
           "id": "mexican-spanish-words-101-200-card-101",
           "front": "five",
@@ -1811,13 +1805,7 @@ window.MEXICAN_SPANISH_CONTENT = {
             "exampleEs": "Vivo en el cuarto piso.",
             "exampleEn": "I live on the fourth floor."
           }
-        }
-      ]
-    },
-    {
-      "id": "mexican-spanish-words-201-300",
-      "title": "Everyday Mexican Spanish — 201–300",
-      "cards": [
+        },
         {
           "id": "mexican-spanish-words-201-300-card-201",
           "front": "several",
@@ -2717,13 +2705,7 @@ window.MEXICAN_SPANISH_CONTENT = {
             "exampleEs": "El joven está estudiando.",
             "exampleEn": "The young man is studying."
           }
-        }
-      ]
-    },
-    {
-      "id": "mexican-spanish-words-301-400",
-      "title": "Everyday Mexican Spanish — 301–400",
-      "cards": [
+        },
         {
           "id": "mexican-spanish-words-301-400-card-301",
           "front": "five hundred",
@@ -3623,13 +3605,7 @@ window.MEXICAN_SPANISH_CONTENT = {
             "exampleEs": "¿Qué onda, cómo estás?",
             "exampleEn": "What's up, how are you?"
           }
-        }
-      ]
-    },
-    {
-      "id": "mexican-spanish-words-401-500",
-      "title": "Everyday Mexican Spanish — 401–500",
-      "cards": [
+        },
         {
           "id": "mexican-spanish-words-401-500-card-401",
           "front": "turn; way around",
@@ -4529,13 +4505,7 @@ window.MEXICAN_SPANISH_CONTENT = {
             "exampleEs": "¡Qué horror, está carísimo!",
             "exampleEn": "How awful, it's incredibly expensive!"
           }
-        }
-      ]
-    },
-    {
-      "id": "mexican-spanish-words-501-600",
-      "title": "Everyday Mexican Spanish — 501–600",
-      "cards": [
+        },
         {
           "id": "mexican-spanish-words-501-600-card-501",
           "front": "disgust",
@@ -5439,8 +5409,8 @@ window.MEXICAN_SPANISH_CONTENT = {
       ]
     },
     {
-      "id": "mexican-spanish-verbs-001-100",
-      "title": "High-Frequency Mexican Spanish Verbs — 001–100",
+      "id": "essential-mexican-spanish-verbs",
+      "title": "Essential Mexican Spanish Verbs",
       "cards": [
         {
           "id": "mexican-spanish-verbs-001-100-card-001",
@@ -6341,13 +6311,7 @@ window.MEXICAN_SPANISH_CONTENT = {
             "exampleEs": "No quiero matar ningún animal.",
             "exampleEn": "I don't want to kill any animal."
           }
-        }
-      ]
-    },
-    {
-      "id": "mexican-spanish-verbs-101-200",
-      "title": "High-Frequency Mexican Spanish Verbs — 101–200",
-      "cards": [
+        },
         {
           "id": "mexican-spanish-verbs-101-200-card-101",
           "front": "to chat; to talk",
@@ -7247,13 +7211,7 @@ window.MEXICAN_SPANISH_CONTENT = {
             "exampleEs": "Tengo que arreglar el coche.",
             "exampleEn": "I have to fix the car."
           }
-        }
-      ]
-    },
-    {
-      "id": "mexican-spanish-verbs-201-300",
-      "title": "High-Frequency Mexican Spanish Verbs — 201–300",
-      "cards": [
+        },
         {
           "id": "mexican-spanish-verbs-201-300-card-201",
           "front": "to get off; to get out",
