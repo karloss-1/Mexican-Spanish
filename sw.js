@@ -1,6 +1,6 @@
 "use strict";
 
-const CACHE_NAME = "mexican-spanish-flashcards-v3";
+const CACHE_NAME = "mexican-spanish-flashcards-v4";
 const APP_FILES = [
   "./", "./index.html", "./manifest.webmanifest", "./data/decks.js", "./study-policy.js",
   "./install.js",

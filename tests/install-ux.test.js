@@ -13,7 +13,7 @@ assert.match(html, /id="installButton"[\s\S]*aria-label="Install app"/);
 assert.match(html, /id="iosInstallDialog"[\s\S]*Install Mexican Spanish Flashcards/);
 assert.ok(html.includes('<script src="install.js"></script>'));
 assert.ok(html.includes('M12 3v11m0 0 4-4m-4 4-4-4M5 21h14'));
-assert.match(serviceWorker, /const CACHE_NAME = "mexican-spanish-flashcards-v3"/);
+assert.match(serviceWorker, /const CACHE_NAME = "mexican-spanish-flashcards-v4"/);
 assert.ok(serviceWorker.includes('"./install.js"'));
 assert.match(html, /DB_NAME="mexican-spanish-flashcards-db",DB_VERSION=2/);
 assert.match(html, /createObjectStore\("deckProgress"/);
